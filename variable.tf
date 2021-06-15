@@ -27,3 +27,7 @@ variable "clustertype" {
   type = "string"
   default = "single-node"
 }
+
+variable "region_name" {
+  type = "string"
+}
