@@ -1,33 +1,33 @@
 variable "cluster_identifier" {
-  type = "string"
+  type = string
   default = ""
 }
 
 variable "db_name" {
-  type = "string"
+  type = string
 default = "mydb"
 }
 
 variable "master_user" {
-  type = "string"
+  type = string
 default = ""
 }
 
 variable "master_pass" {
-  type = "string"
+  type = string
   default = ""
 }
 
 variable "node_type" {
-  type = "string"
+  type = string
   default = "dc2.large"
 }
 
 variable "clustertype" {
-  type = "string"
+  type = string
   default = "single-node"
 }
 
 variable "region_name" {
-  type = "string"
+  type = string
 }
