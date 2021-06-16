@@ -10,7 +10,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_name" {
-  description = "Subnet name needs to be given, where we need to launch the cluster"
+  description = "Tag name needs to be given, where we need to launch the cluster"
   type = string
   default = ""
 }
