@@ -1,3 +1,8 @@
+variable "region_name" {
+  type = string
+  default = ""
+}
+
 variable "vpc_id" {
   description = "VPC ID needs to be given manually"
   type = string
