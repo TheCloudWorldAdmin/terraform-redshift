@@ -1,3 +1,33 @@
+variable "final_snapshot_identifier" {
+  description = "(Optional) The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, 'skip_final_snapshot' must be false."
+  type        = string
+  default     = "tunna-snapshot"
+}
+
+variable "skip_final_snapshot" {
+  description = "If true (default), no snapshot will be made before deleting DB"
+  type        = bool
+  default     = false
+}
+
+variable "preferred_maintenance_window" {
+  description = "When AWS can run snapshot, can't overlap with maintenance window"
+  type        = string
+  default     = "sat:10:00-sat:10:30"
+}
+
+variable "automated_snapshot_retention_period" {
+  description = "How long will we retain backups"
+  type        = number
+  default     = 5
+}
+
+variable "snapshot_copy_destination_region" {
+  description = "(Optional) The name of the region where the snapshot will be copied."
+  type        = string
+  default     = "us-east-2"
+}
+
 variable "tags" {
   type = map(string)
   default = {
