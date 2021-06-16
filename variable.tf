@@ -26,7 +26,7 @@ variable "identifier" {
   type = string
   default = ""
 }
-variable "version" {
+variable "version_detail" {
   description = "Only 1.0 is available as of now"
   type = string
   default = "1.0"
