@@ -60,6 +60,21 @@ resource "aws_redshift_cluster" "default" {
   database_name      = var.db_name
   port = var.db_port
   
+  # Snapshots and backups
+  final_snapshot_identifier           = var.final_snapshot_identifier
+  skip_final_snapshot                 = var.skip_final_snapshot
+  automated_snapshot_retention_period = var.automated_snapshot_retention_period
+  preferred_maintenance_window        = var.preferred_maintenance_window
+ 
+
+  # Snapshots copy to another region
+  dynamic "snapshot_copy" {
+    for_each = compact([var.snapshot_copy_destination_region])
+    content {
+      destination_region = var.snapshot_copy_destination_region
+      retention_period   = var.automated_snapshot_retention_period
+    }
+  }
   # Encryption
   encrypted  = var.encrypted
   #kms_key_id = var.kms_key_id
