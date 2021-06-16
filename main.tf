@@ -14,7 +14,7 @@ data "aws_subnet" "subnet_list" {
 }
 
 output "subnet_ids" {
-  value = [for sub in data.aws_subnet.subnet_list : sub.ids]
+  value = [for sub in data.aws_subnet.subnet_list : sub.id]
 }
 
 #data "aws_subnet_ids" "sub_name" {                              
@@ -27,7 +27,7 @@ output "subnet_ids" {
 
 resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   name       = var.redshift_subnet_group
-  subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.ids]
+  subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.id]
 
   tags = {
     environment = "test"
