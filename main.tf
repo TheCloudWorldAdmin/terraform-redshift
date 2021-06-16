@@ -41,11 +41,11 @@ resource "aws_redshift_cluster" "default" {
   master_password    = var.master_pass
   
   # IAM Roles
-  iam_roles = var.cluster_iam_roles
+  iam_roles = [var.cluster_iam_roles]
   
   
   allow_version_upgrade = var.version_upgrade
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = [var.vpc_security_group_ids]
   
   #cluster_subnet_group_name    = local.redshift_subnet_group_name
   #cluster_parameter_group_name = local.parameter_group_name
