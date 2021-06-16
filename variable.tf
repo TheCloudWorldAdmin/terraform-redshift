@@ -1,3 +1,6 @@
+variable "tags" {}
+variable "db_name" {}
+
 variable "region_name" {
   type = string
   default = ""
@@ -84,7 +87,7 @@ variable "az" {
   default = ""
 }
 
-variable "allow_version_upgrade" {
+variable "version_upgrade" {
   description = "major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster, if it is true"
   type        = bool
   default     = false
