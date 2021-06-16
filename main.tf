@@ -33,7 +33,7 @@ resource "aws_redshift_subnet_group" "redshift_subnet_group" {
 
 resource "aws_redshift_cluster" "default" {
   cluster_identifier = var.identifier
-  cluster_version = var.version
+  cluster_version = var.version_detail
   number_of_nodes    = var.node_count
   node_type          = var.node_type
   cluster_type       = var.node_count > 1 ? "multi-node" : "single-node"
