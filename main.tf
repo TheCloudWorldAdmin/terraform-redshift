@@ -16,7 +16,7 @@
 data "aws_subnet_ids" "sub_name" {                              
   vpc_id = var.vpc_id                            
   tags   = {                                                       
-    name = ${var.subnet_name}
+    name = var.subnet_name
   }                                                                   
 } 
 
