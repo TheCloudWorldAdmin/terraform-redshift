@@ -1,4 +1,9 @@
-variable "tags" {}
+variable "tags" {
+  type = map(string)
+  default = {
+    "name" : "redshift"
+  }
+}
 variable "db_name" {}
 
 variable "region_name" {
@@ -65,8 +70,8 @@ variable "node_type" {
 
 variable "public_Access" {
   description = "Allow instances and devices outside the VPC to connect to your database through the cluster endpoint."
-  type = string
-  default = "disable"
+  type = bool
+  default = false
 }
 
 variable "db_port" {
