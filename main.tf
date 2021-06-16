@@ -14,7 +14,7 @@
 #}
 #
 data "aws_subnet_ids" "sub_name" {                              
-  vpc_id = data.aws_vpc.sub_name.id                             
+  vpc_id = var.vpc_id                            
   tags   = {                                                       
     name = ${var.subnet_name}
   }                                                                   
@@ -25,31 +25,11 @@ resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   subnet_ids = [data.aws_subnet_ids.sub_name.id]
 
   tags = {
-    environment = "Production"
+    environment = "test"
   }
 }
 
 # Redshift parameter group
-
-resource "aws_redshift_parameter_group" "bar" {
-  name   = "parameter-group-test-terraform"
-  family = "redshift-1.0"
-
-  parameter {
-    name  = "require_ssl"
-    value = "true"
-  }
-
-  parameter {
-    name  = "query_group"
-    value = "example"
-  }
-
-  parameter {
-    name  = "enable_user_activity_logging"
-    value = "true"
-  }
-}
 
 resource "aws_redshift_cluster" "default" {
   cluster_identifier = var.identifier
@@ -77,14 +57,14 @@ resource "aws_redshift_cluster" "default" {
   
   # Encryption
   encrypted  = var.encrypted
-  kms_key_id = var.kms_key_id 
+  #kms_key_id = var.kms_key_id
   
   # Logging
-  logging {
-    enable        = var.enable_logging
-    bucket_name   = var.logging_bucket_name
-    s3_key_prefix = var.logging_s3_key_prefix
-  }
+ # logging {
+ #   enable        = var.enable_logging
+ #   bucket_name   = var.logging_bucket_name
+ #   s3_key_prefix = var.logging_s3_key_prefix
+ # }
 
   tags = var.tags
 
