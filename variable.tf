@@ -59,8 +59,8 @@ variable "cluster_iam_roles" {
 
 variable "node_type" {
   description = "List of instance types"
-  type = list(string)
-  default = ["dc2.large"]
+  type = string
+  default = "dc2.large"
 }
 
 variable "public_Access" {
