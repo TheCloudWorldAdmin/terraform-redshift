@@ -75,6 +75,7 @@ variable "db_port" {
 variable "vpc_security_group_ids" {
   description = "List of security groups can be associated with the cluster."
   type        = list(string)
+  default = []
 }
 
 variable "az" {
