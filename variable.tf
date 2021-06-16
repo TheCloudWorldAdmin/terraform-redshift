@@ -1,3 +1,15 @@
+variable "node_type" {
+  description = "List of instance types"
+  type = list(string)
+  default = ["ra3.4xlarge", "dc2.large"]
+}
+
+variable "public_Access" {
+  description = "Allow instances and devices outside the VPC to connect to your database through the cluster endpoint."
+  type = string
+  default = "disable"
+}
+
 variable "db_port" {
   description = "Database port on which DB listens"
   type        = number
