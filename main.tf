@@ -17,6 +17,7 @@ data "aws_subnet_ids" "sub_name" {
   vpc_id = var.vpc_id                            
   filter   {                                                       
     name = var.subnet_name
+   values = ["subnet-04e85da95379da5ff", "subnet-041e4e9783743610e"]
   }                                                                   
 } 
 
