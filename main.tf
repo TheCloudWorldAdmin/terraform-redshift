@@ -1,29 +1,33 @@
 # Redshift subnet group
 
-#data "aws_subnet_ids" "sub_id" {
-#  vpc_id = var.vpc_id
-#}
-
-#data "aws_subnet" "subnet_list" {
- # for_each = data.aws_subnet_ids.sub_id.ids
- # id       = each.value
-#}
-
-#output "subnet_ids" {
-#  value = [for sub in data.aws_subnet.subnet_list : sub.ids]
-#}
-#
-data "aws_subnet_ids" "sub_name" {                              
-  vpc_id = var.vpc_id                            
-  filter   {                                                       
+data "aws_subnet_ids" "sub_name" {
+  vpc_id = var.vpc_id
+filter   {                                                       
     name = "tag:Name"
    values = ["redshift"]
-  }                                                                   
-} 
+  }   
+}
+
+data "aws_subnet" "subnet_list" {
+ for_each = data.aws_subnet_ids.sub_name.ids
+ id       = each.value
+}
+
+output "subnet_ids" {
+  value = [for sub in data.aws_subnet.subnet_list : sub.ids]
+}
+
+#data "aws_subnet_ids" "sub_name" {                              
+ # vpc_id = var.vpc_id                            
+  #filter   {                                                       
+   # name = "tag:Name"
+   #values = ["redshift"]
+  #}                                                                   
+#} 
 
 resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   name       = var.redshift_subnet_group
-  subnet_ids = [data.aws_subnet_ids.sub_name.id]
+  subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.ids]
 
   tags = {
     environment = "test"
