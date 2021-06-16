@@ -50,8 +50,8 @@ variable "master_pass" {
 
 variable "cluster_iam_roles" {
   description = "A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 variable "node_type" {
@@ -74,8 +74,8 @@ variable "db_port" {
 
 variable "vpc_security_group_ids" {
   description = "List of security groups can be associated with the cluster."
-  type        = list(string)
-  default = []
+  type        = string
+  default = ""
 }
 
 variable "az" {
