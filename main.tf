@@ -85,7 +85,7 @@ resource "aws_redshift_cluster" "default" {
   encrypted  = var.encrypted
   #kms_key_id = var.kms_key_id
   
-  # Logging
+ # Logging
  # logging {
  #   enable        = var.enable_logging
  #   bucket_name   = var.logging_bucket_name
