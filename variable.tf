@@ -9,15 +9,15 @@ variable "security_group_name" {
   default = ""
 }
 
-variable "external_id" {
-  description = "Authentication Key"
-  type = string
-}
+#variable "external_id" {
+#  description = "Authentication Key"
+#  type = string
+#}
 
-variable "role_arn" {
-  description = "Role ARN"
-  type = string
-}
+#variable "role_arn" {
+#  description = "Role ARN"
+#  type = string
+#}
 
 variable "env_name" {
   description = "Environment Name to be given"
