@@ -20,7 +20,7 @@ data "aws_subnet" "subnet_list" {
 
 
 
-  data "aws_security_groups" "sg" {
+  data "aws_security_group" "sg" {
    vpc_id = data.aws_vpc.vpc.id
    filter   {                                                       
     name = "tag:Name"
