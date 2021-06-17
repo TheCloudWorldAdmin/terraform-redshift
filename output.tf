@@ -1,4 +1,4 @@
-output "cluster_endpoint" {
+output "cluster_arn" {
   value = aws_redshift_cluster.redshift_cluser.arn
 }
 
@@ -6,31 +6,31 @@ output "cluster_id" {
   value = aws_redshift_cluster.redshift_cluster.id
 }
 
-output "cluster_name" {
+output "cluster_identifier" {
   value = aws_redshift_cluster.redshift_cluster.cluster_identifier
 }
 
-output "cluster_endpoint" {
+output "cluster_type" {
   value = aws_redshift_cluster.redshift_cluser.cluster_type
 }
 
-output "cluster_id" {
+output "cluster_node_type" {
   value = aws_redshift_cluster.redshift_cluster.node_type
 }
 
-output "cluster_name" {
+output "cluster_database_name" {
   value = aws_redshift_cluster.redshift_cluster.database_name
 }
 
-output "cluster_endpoint" {
+output "cluster_availability_zone" {
   value = aws_redshift_cluster.redshift_cluser.availability_zone
 }
 
-output "cluster_id" {
+output "cluster_automated_snapshot_retention_period" {
   value = aws_redshift_cluster.redshift_cluster.automated_snapshot_retention_period
 }
 
-output "preferred_maintenance_window" {
+output "cluster_preferred_maintenance_window" {
   value = aws_redshift_cluster.redshift_cluster.preferred_maintenance_window
 }
 
@@ -42,7 +42,7 @@ output "cluster_encrypted" {
   value = aws_redshift_cluster.redshift_cluster.encrypted
 }
 
-output "cluster_cluster_security_groups" {
+output "cluster_security_groups" {
   value = aws_redshift_cluster.redshift_cluser.cluster_security_groups
 }
 
