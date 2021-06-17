@@ -96,7 +96,7 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   # Lifecycle
 
   lifecycle {
-    ignore_changes = [master_pass]
+    ignore_changes = [master_password]
   }
 }  
 
