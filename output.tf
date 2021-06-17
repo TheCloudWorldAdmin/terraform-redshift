@@ -1,5 +1,5 @@
 output "cluster_arn" {
-  value = aws_redshift_cluster.redshift_cluser.arn
+  value = aws_redshift_cluster.redshift_cluster.arn
 }
 
 output "cluster_id" {
@@ -11,7 +11,7 @@ output "cluster_identifier" {
 }
 
 output "cluster_type" {
-  value = aws_redshift_cluster.redshift_cluser.cluster_type
+  value = aws_redshift_cluster.redshift_cluster.cluster_type
 }
 
 output "cluster_node_type" {
@@ -23,7 +23,7 @@ output "cluster_database_name" {
 }
 
 output "cluster_availability_zone" {
-  value = aws_redshift_cluster.redshift_cluser.availability_zone
+  value = aws_redshift_cluster.redshift_cluster.availability_zone
 }
 
 output "cluster_automated_snapshot_retention_period" {
@@ -43,7 +43,7 @@ output "cluster_encrypted" {
 }
 
 output "cluster_security_groups" {
-  value = aws_redshift_cluster.redshift_cluser.cluster_security_groups
+  value = aws_redshift_cluster.redshift_cluster.cluster_security_groups
 }
 
 output "cluster_vpc_security_group_ids" {
@@ -71,7 +71,7 @@ output "cluster_subnet_group_name" {
 }
 
 output "cluster_public_key" {
-  value = aws_redshift_cluster.redshift_cluser.cluster_public_key
+  value = aws_redshift_cluster.redshift_cluster.cluster_public_key
 }
 
 output "cluster_revision_number" {
