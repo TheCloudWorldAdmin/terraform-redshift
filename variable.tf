@@ -55,12 +55,7 @@ variable "snapshot_copy_destination_region" {
   default     = "us-east-2"
 }
 
-variable "tags" {
-  type = map(string)
-  default = {
-    "name" : "redshift"
-  }
-}
+
 variable "db_name" {
   description = "Database name for Redshift should be given"
   type = string
