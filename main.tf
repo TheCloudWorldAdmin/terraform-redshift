@@ -13,11 +13,6 @@ data "aws_subnet" "subnet_list" {
  id       = each.value
 }
 
-# Subnet IDs will be shown as output
-
-output "subnet_ids" {
-  value = [for sub in data.aws_subnet.subnet_list : sub.id]
-}
 
 # Redshift Subnet Group Creation
 
