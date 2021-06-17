@@ -1,19 +1,3 @@
-# Fetching Subnet details where cluster needs to be launched
-
-data "aws_subnet_ids" "sub_name" {
-  vpc_id = var.vpc_id
-filter   {                                                       
-    name = "tag:Name"
-   values = [var.subnet_name]
-  }   
-}
-
-data "aws_subnet" "subnet_list" {
- for_each = data.aws_subnet_ids.sub_name.ids
- id       = each.value
-}
-
-
 # Redshift Subnet Group Creation
 
 
@@ -43,14 +27,6 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   
   # Automatic Version & Security group ID details
   
-  data "aws_security_groups" "test" {
-   vpc_id = var.vpc_id
-   filter   {                                                       
-    name = "tag:Name"
-   values = [var.security_group_name]
-  }   
-}
-
   allow_version_upgrade = var.version_upgrade
   vpc_security_group_ids = [var.vpc_security_group_ids]
   
