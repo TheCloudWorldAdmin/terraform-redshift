@@ -67,7 +67,9 @@ resource "aws_redshift_cluster" "redshift_cluster" {
 
   # Tags
   
-  tags = var.tags
+  tags = {
+    "name" : var.redshift_cluster_tag
+  }
   
   # Redshift Parameter Group
   
