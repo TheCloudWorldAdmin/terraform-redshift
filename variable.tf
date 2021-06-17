@@ -1,3 +1,41 @@
+variable "final_snapshot_identifier" {
+  description = "(Optional) The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, 'skip_final_snapshot' must be false."
+  type        = string
+  default     = "tunna-snapshot"
+}
+
+variable "skip_final_snapshot" {
+  description = "If true (default), no snapshot will be made before deleting DB"
+  type        = bool
+  default     = false
+}
+
+variable "preferred_maintenance_window" {
+  description = "When AWS can run snapshot, can't overlap with maintenance window"
+  type        = string
+  default     = "sat:10:00-sat:10:30"
+}
+
+variable "automated_snapshot_retention_period" {
+  description = "How long will we retain backups"
+  type        = number
+  default     = 5
+}
+
+variable "snapshot_copy_destination_region" {
+  description = "(Optional) The name of the region where the snapshot will be copied."
+  type        = string
+  default     = "us-east-2"
+}
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "name" : "redshift"
+  }
+}
+variable "db_name" {}
+
 variable "region_name" {
   type = string
   default = ""
@@ -10,7 +48,7 @@ variable "vpc_id" {
 }
 
 variable "subnet_name" {
-  description = "Subnet name needs to be given, where we need to launch the cluster"
+  description = "Tag name needs to be given, where we need to launch the cluster"
   type = string
   default = ""
 }
@@ -26,7 +64,7 @@ variable "identifier" {
   type = string
   default = ""
 }
-variable "version" {
+variable "version_detail" {
   description = "Only 1.0 is available as of now"
   type = string
   default = "1.0"
@@ -50,20 +88,20 @@ variable "master_pass" {
 
 variable "cluster_iam_roles" {
   description = "A list of IAM Role ARNs to associate with the cluster. A Maximum of 10 can be associated to the cluster at any time."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 variable "node_type" {
   description = "List of instance types"
-  type = list(string)
-  default = ["ra3.4xlarge", "dc2.large"]
+  type = string
+  default = "dc2.large"
 }
 
 variable "public_Access" {
   description = "Allow instances and devices outside the VPC to connect to your database through the cluster endpoint."
-  type = string
-  default = "disable"
+  type = bool
+  default = false
 }
 
 variable "db_port" {
@@ -74,7 +112,8 @@ variable "db_port" {
 
 variable "vpc_security_group_ids" {
   description = "List of security groups can be associated with the cluster."
-  type        = list(string)
+  type        = string
+  default = ""
 }
 
 variable "az" {
@@ -83,7 +122,7 @@ variable "az" {
   default = ""
 }
 
-variable "allow_version_upgrade" {
+variable "version_upgrade" {
   description = "major version upgrades can be applied during the maintenance window to the Amazon Redshift engine that is running on the cluster, if it is true"
   type        = bool
   default     = false
