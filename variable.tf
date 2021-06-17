@@ -1,3 +1,8 @@
+variable "redshift_cluster_tag" {
+  description = "Tag for redshift"
+  type = string
+  default = ""
+}
 variable "security_group_name" {
   description = "Security group details with the mentioned name should be fetched"
   type = string
