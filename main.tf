@@ -28,7 +28,7 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   # Automatic Version & Security group ID details
   
   allow_version_upgrade = var.version_upgrade
-  vpc_security_group_ids = [data.aws_security_group.id]
+  vpc_security_group_ids = [data.aws_security_groups.sg.id]
   
   
   availability_zone = var.az
