@@ -4,7 +4,7 @@ filter {
 name = "tag:Name"
 values = [var.vpc_name]
 }
-
+}
 data "aws_subnet_ids" "sub_name" {
   vpc_id = data.aws_vpc.vpc.id
 filter   {                                                       
