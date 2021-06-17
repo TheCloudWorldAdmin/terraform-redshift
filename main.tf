@@ -17,6 +17,18 @@ output "subnet_ids" {
   value = [for sub in data.aws_subnet.subnet_list : sub.id]
 }
 
+
+#output "subnet_ids" {
+#  value = [for sub in data.aws_subnet.subnet_list : sub.ids]
+#}
+#
+data "aws_subnet_ids" "sub_name" {                              
+  vpc_id = var.vpc_id                            
+  tags   = {                                                       
+    name = var.subnet_name
+  }                                                                   
+} 
+=======
 #data "aws_subnet_ids" "sub_name" {                              
  # vpc_id = var.vpc_id                            
   #filter   {                                                       
