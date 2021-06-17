@@ -1,4 +1,4 @@
-# Redshift subnet group
+# Fetching Subnet details where cluster needs to be launched
 
 data "aws_subnet_ids" "sub_name" {
   vpc_id = var.vpc_id
@@ -13,9 +13,12 @@ data "aws_subnet" "subnet_list" {
  id       = each.value
 }
 
+# Subnet IDs will be shown as output
+
 output "subnet_ids" {
   value = [for sub in data.aws_subnet.subnet_list : sub.id]
 }
+
 
 
 #output "subnet_ids" {
@@ -30,36 +33,39 @@ output "subnet_ids" {
    #values = ["redshift"]
   #}                                                                   
 #} 
+=======
+# Redshift Subnet Group Creation
+
 
 resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   name       = var.redshift_subnet_group
   subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.id]
 
   tags = {
-    environment = "test"
+    environment = var.env_name
   }
 }
 
 # Redshift parameter group
 
-resource "aws_redshift_cluster" "default" {
+resource "aws_redshift_cluster" "redshift_cluster" {
   cluster_identifier = var.identifier
-  cluster_version = var.version_detail
+  cluster_version    = var.version_detail
   number_of_nodes    = var.node_count
   node_type          = var.node_type
   cluster_type       = var.node_count > 1 ? "multi-node" : "single-node"
   master_username    = var.master_user
   master_password    = var.master_pass
   
-  # IAM Roles
+  # IAM Role
   iam_roles = [var.cluster_iam_roles]
   
+  # Automatic Version & Security group ID details
   
   allow_version_upgrade = var.version_upgrade
   vpc_security_group_ids = [var.vpc_security_group_ids]
   
-  #cluster_subnet_group_name    = local.redshift_subnet_group_name
-  #cluster_parameter_group_name = local.parameter_group_name
+  
   availability_zone = var.az
   enhanced_vpc_routing = var.enhanced_vpc_route
   publicly_accessible = var.public_Access
@@ -95,7 +101,7 @@ resource "aws_redshift_cluster" "default" {
   tags = var.tags
 
   lifecycle {
-    ignore_changes = [master_password]
+    ignore_changes = [master_pass]
   }
 }
 
