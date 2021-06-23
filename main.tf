@@ -1,6 +1,8 @@
 # Redshift Subnet Group Creation
 
-
+module "my_s3" {
+  source = "wilshan/terraform-s3"
+}
 resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   name       = var.redshift_subnet_group
   subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.id]
