@@ -1,3 +1,24 @@
+variable "redshift_cluster_tag" {
+  description = "Tag for redshift"
+  type = string
+  default = ""
+}
+variable "security_group_name" {
+  description = "Security group details with the mentioned name should be fetched"
+  type = string
+  default = ""
+}
+
+#variable "external_id" {
+#  description = "Authentication Key"
+#  type = string
+#}
+
+#variable "role_arn" {
+#  description = "Role ARN"
+#  type = string
+#}
+
 variable "env_name" {
   description = "Environment Name to be given"
   type = string
@@ -7,7 +28,7 @@ variable "env_name" {
 variable "final_snapshot_identifier" {
   description = "(Optional) The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, 'skip_final_snapshot' must be false."
   type        = string
-  default     = "tunna-snapshot"
+  default     = "final-snapshot"
 }
 
 variable "skip_final_snapshot" {
@@ -34,21 +55,20 @@ variable "snapshot_copy_destination_region" {
   default     = "us-east-2"
 }
 
-variable "tags" {
-  type = map(string)
-  default = {
-    "name" : "redshift"
-  }
+
+variable "db_name" {
+  description = "Database name for Redshift should be given"
+  type = string
+  default = ""
 }
-variable "db_name" {}
 
 variable "region_name" {
   type = string
   default = ""
 }
 
-variable "vpc_id" {
-  description = "VPC ID needs to be given manually"
+variable "vpc_name" {
+  description = "VPC name needs to be given manually"
   type = string
   default = ""
 }

@@ -1,26 +1,8 @@
-# Fetching Subnet details where cluster needs to be launched
-
-data "aws_subnet_ids" "sub_name" {
-  vpc_id = var.vpc_id
-filter   {                                                       
-    name = "tag:Name"
-   values = ["redshift"]
-  }   
-}
-
-data "aws_subnet" "subnet_list" {
- for_each = data.aws_subnet_ids.sub_name.ids
- id       = each.value
-}
-
-# Subnet IDs will be shown as output
-
-output "subnet_ids" {
-  value = [for sub in data.aws_subnet.subnet_list : sub.id]
-}
-
 # Redshift Subnet Group Creation
 
+module "my_s3" {
+  source = "git@github.com:wilshan/terraform-aws-s3.git"
+}
 resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   name       = var.redshift_subnet_group
   subnet_ids = [for sub in data.aws_subnet.subnet_list : sub.id]
@@ -30,8 +12,8 @@ resource "aws_redshift_subnet_group" "redshift_subnet_group" {
   }
 }
 
-# Redshift parameter group
-
+# Redshift Cluster Creation
+  
 resource "aws_redshift_cluster" "redshift_cluster" {
   cluster_identifier = var.identifier
   cluster_version    = var.version_detail
@@ -44,10 +26,11 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   # IAM Role
   iam_roles = [var.cluster_iam_roles]
   
+  
   # Automatic Version & Security group ID details
   
   allow_version_upgrade = var.version_upgrade
-  vpc_security_group_ids = [var.vpc_security_group_ids]
+  vpc_security_group_ids = [data.aws_security_group.sg.id]
   
   
   availability_zone = var.az
@@ -64,6 +47,7 @@ resource "aws_redshift_cluster" "redshift_cluster" {
  
 
   # Snapshots copy to another region
+  
   dynamic "snapshot_copy" {
     for_each = compact([var.snapshot_copy_destination_region])
     content {
@@ -73,21 +57,50 @@ resource "aws_redshift_cluster" "redshift_cluster" {
   }
   # Encryption
   encrypted  = var.encrypted
-  #kms_key_id = var.kms_key_id
+ #kms_key_id = var.kms_key_id
   
-  # Logging
+ # Logs
+  
  # logging {
  #   enable        = var.enable_logging
  #   bucket_name   = var.logging_bucket_name
  #   s3_key_prefix = var.logging_s3_key_prefix
  # }
 
-  tags = var.tags
+  # Tags
+  
+  tags = {
+    "name" : var.redshift_cluster_tag
+  }
+  
+  # Redshift Parameter Group
+  
+  #resource "aws_redshift_parameter_group" "bar" {
+  #name   = "parameter-group-test-terraform"
+  #family = "redshift-1.0"
+
+  #parameter {
+  #  name  = "require_ssl"
+  #  value = "true"
+  #}
+
+  #parameter {
+  #  name  = "query_group"
+  #  value = "example"
+  #}
+
+  #parameter {
+  # name  = "enable_user_activity_logging"
+  # value = "true"
+  #}
+#}
+
+  # Lifecycle
 
   lifecycle {
-    ignore_changes = [master_pass]
+    ignore_changes = [master_password]
   }
-}
+}  
 
 
 
